@@ -6,7 +6,9 @@ const Database = require("better-sqlite3");
 const db = new Database("database.db");
 db.pragma("foreign_keys = ON");
 
-const TIMER_DURATION = 10 * 60 * 1000;
+const TIMER_DURATION = process.env.NODE_ENV === "production"
+  ? 10 * 60 * 1000
+  : 60 * 1000;
 function getRemainingMs(startedAt) {
   const elapsed = Date.now() - startedAt;
   return Math.max(TIMER_DURATION - elapsed, 0);
@@ -23,7 +25,10 @@ const isCarPassedLineFirstTime = new Map();
 // Public
 const io = new Server({
   cors: {
-    origin: "http://localhost:5173",
+    origin: [
+          "http://localhost:5173",
+          "http://localhost:4173",
+        ],
   },
 });
 

@@ -44,6 +44,9 @@ import { isLapLineObserverConnected } from "./socket/lapLineObserverSocket";
 const router = createBrowserRouter([
   {
     index: true,
+    loader: () => {
+      return redirect('/front-desk')
+    },
     element: <div>Welcome to race track</div>,
   },
 

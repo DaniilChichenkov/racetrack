@@ -6,12 +6,12 @@
   ],
   "scripts": {
     "check-env": "node scripts/check-env.mjs",
-
     "predev": "npm run check-env",
-    "dev": "concurrently -n FRONTEND,BACKEND \"npm run dev --workspace frontend\" \"npm run dev --workspace backend\"",
-
+    "dev": "concurrently -k -n FRONTEND,BACKEND \"npm run dev --workspace frontend\" \"npm run dev --workspace backend\"",
     "prebuild": "npm run check-env",
-    "build": "npm run build --workspace frontend && npm run build --workspace backend"
+    "build": "npm run build --workspace frontend",
+    "prestart": "npm run check-env",
+    "start": "concurrently -k -n FRONTEND,BACKEND \"npm run start --workspace frontend\" \"npm run start --workspace backend\""
   },
   "devDependencies": {
     "concurrently": "^9.0.0"
